@@ -129,13 +129,10 @@ sketch
 pyvenv.cfg
 .env
 .venv
-env/
 venv/
-ENV/
 env.bak/
 venv.bak/
 pip-selfcheck.json
-
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
@@ -150,3 +147,4 @@ pip-selfcheck.json
 # End of https://www.gitignore.io/api/venv,react,python,visualstudiocode
 
 *.sqlite3
+*.env

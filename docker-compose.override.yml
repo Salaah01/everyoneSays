@@ -1,0 +1,28 @@
+version: '3.2'
+
+services:
+    vote:
+        ports:
+            - "8000:8000"
+        volumes:
+            - ./vote/:/app
+        command: python ./everyoneSays/manage.py runserver 0.0.0.0:8000
+
+    psql:
+        environment: 
+            - POSTGRES_USER_FILE=/run/secrets/db_user
+            - POSTGRES_PASSWORD_FILE=/run/secrets/db_password
+        secrets:
+            - db_user
+            - db_password
+
+    worker:
+        volumes:
+            - ./worker/:/app
+        command: python worker.py
+
+secrets:
+    db_user:
+        file: psql/env/.db_user.env
+    db_password:
+        file: psql/env/.db_password.env

@@ -1,0 +1,24 @@
+version: '3.2'
+
+services:
+    vote:
+        build: ./vote/.
+        depends_on:
+            - redis
+        
+    redis:
+        image: redis
+    
+    psql:
+        image: postgres:12.2
+        volumes:
+            - psql_data:/var/lib/postgresql/data
+
+    worker:
+        build: ./worker/.
+        depends_on: 
+            - redis
+            - psql
+
+volumes:
+    psql_data:
