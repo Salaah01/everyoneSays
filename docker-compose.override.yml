@@ -2,10 +2,19 @@ version: '3.2'
 
 services:
     vote:
+        build: ./vote/.
         ports:
             - "8000:8000"
         volumes:
             - ./vote/:/app
+        command: python ./everyoneSays/manage.py runserver 0.0.0.0:8000
+
+    main_web:
+        build: ./main_web/.
+        expose:
+            - 8000
+        volumes:
+            - ./main_web/:/app
         command: python ./everyoneSays/manage.py runserver 0.0.0.0:8000
 
     psql:
@@ -20,6 +29,9 @@ services:
         volumes:
             - ./worker/:/app
         command: python worker.py
+
+    nginx:
+        build: ./nginx/.
 
 secrets:
     db_user:
