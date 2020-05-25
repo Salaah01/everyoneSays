@@ -28,7 +28,7 @@ class Worker:
 
     def incrementVotes(self):
         """Increments the daily votes."""
-        self.get_redis_connection().incr('votesToday')        
+        self.get_redis_connection().incr('votesToday')
 
     def resetVotes(self):
         """Resets the daily votes."""
@@ -53,10 +53,11 @@ class Worker:
                 self.incrementVotes()
             else:
                 time.sleep(0.1)
-            
+
             if self.currDate != date.today():
                 self.resetVotes()
                 self.currDate = date.today()
+
 
 if __name__ == "__main__":
     Worker().dispatcher()
