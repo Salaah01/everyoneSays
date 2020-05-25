@@ -21,5 +21,12 @@ services:
             - redis
             - psql
 
+    nginx:
+        build: ./nginx/.
+        ports:
+            - 80:80
+        depends_on: 
+            - vote
+
 volumes:
     psql_data:
